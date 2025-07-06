@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "WorkoutApiBase.Controllers.WorkoutsController",
+    "Method": "GetWorkouts",
+    "RelativePath": "api/Workouts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

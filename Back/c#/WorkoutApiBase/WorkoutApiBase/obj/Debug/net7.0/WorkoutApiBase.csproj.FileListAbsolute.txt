@@ -1,0 +1,9 @@
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\rpswa.dswa.cache.json
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.GeneratedMSBuildEditorConfig.editorconfig
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.AssemblyInfoInputs.cache
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.AssemblyInfo.cs
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.csproj.CoreCompileInputs.cache
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.MvcApplicationPartsAssemblyInfo.cache
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.RazorAssemblyInfo.cache
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.RazorAssemblyInfo.cs
+X:\GitHub\EpochSport\Back\c#\WorkoutApiBase\WorkoutApiBase\obj\Debug\net7.0\WorkoutApiBase.sourcelink.json
