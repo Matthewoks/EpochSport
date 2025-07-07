@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../models/workout.dart';
+import '../services/api_service.dart';
+
 
 class AddWorkoutScreen extends StatefulWidget {
-  const AddWorkoutScreen({super.key});
+  final DateTime selectedDate;
+  const AddWorkoutScreen({super.key, required this.selectedDate});
 
   @override
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
@@ -16,6 +19,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   final List<String> _exercises = [];
   DateTime _selectedDate = DateTime.now();
   Color _selectedColor = Colors.blue;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = widget.selectedDate;
+  }
 
   void _selectDate() async {
     final picked = await showDatePicker(
@@ -68,16 +77,23 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     }
   }
 
-  void _submitWorkout() {
+  Future<void> _submitWorkout() async {
     if (_formKey.currentState!.validate() && _exercises.isNotEmpty) {
       final workout = Workout(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        id: "7",
         name: _nameController.text,
-        date: _selectedDate,
-        color: _selectedColor,
+        color: '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
         exercises: _exercises,
       );
-      Navigator.pop(context, workout); // Torna al calendario passando l'allenamento
+      try {
+        await ApiService.addWorkout(_selectedDate, workout);
+        Navigator.pop(context, true); // invia risultato positivo
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Errore: ${e.toString()}')),
+        );
+      }
+
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Compila tutti i campi e aggiungi almeno un esercizio')),

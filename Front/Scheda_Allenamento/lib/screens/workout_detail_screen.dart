@@ -11,7 +11,7 @@ class WorkoutDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(workout.name),
-        backgroundColor: workout.color,
+        backgroundColor: workout.colorAsColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -19,7 +19,7 @@ class WorkoutDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data: ${workout.date.day}/${workout.date.month}/${workout.date.year}',
+              '',
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 16),

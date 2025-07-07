@@ -73,10 +73,9 @@ class _WorkoutCreateScreenState extends State<WorkoutCreateScreen> {
   void _submit() {
     if (_formKey.currentState!.validate() && selectedDate != null && exercises.isNotEmpty) {
       final workout = Workout(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        id: "7",
         name: name,
-        date: selectedDate!,
-        color: selectedColor,
+        color: '#${selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
         exercises: exercises,
       );
       widget.onCreate(workout);
@@ -160,3 +159,4 @@ class _WorkoutCreateScreenState extends State<WorkoutCreateScreen> {
     );
   }
 }
+

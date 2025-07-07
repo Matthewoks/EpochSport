@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "tR7mc3uNYoE=",
+  "success": true,
+  "projectFilePath": "X:\\GitHub\\EpochSport\\Back\\c#\\MinimalApi\\MinimalApi\\MinimalApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mmaio\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.6\\microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
+    "C:\\Users\\mmaio\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512",
+    "C:\\Users\\mmaio\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
+  ],
+  "logs": []
+}
