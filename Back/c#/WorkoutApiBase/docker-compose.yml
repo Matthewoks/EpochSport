@@ -1,0 +1,32 @@
+﻿services:
+      webaapi:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        image: webapi_postgresql_v1
+        ports:
+          - "5003:80"
+        environment:
+          - ASPNETCORE_URLS=http://+:80
+          - ASPNETCORE_ENVIRONMENT=Development
+          - ConnectionStrings__DefaultConnection=Host=postgreserver;Username=postgres;Password=ciao;Database=workout; TrustServerCertificate=true;
+        depends_on:      
+          - postgreserver
+
+      postgreserver:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: ciao
+            POSTGRES_DB: workout
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+networks:
+  default:
+    name: myworkoutnet
+
+volumes:
+  pgdata:
+        

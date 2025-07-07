@@ -1,38 +1,32 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using WorkoutApiBase.Repositories;
-using WorkoutApiBase.Services;
-
-
+using WorkoutApiBase;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<WorkoutDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddSingleton<WorkoutRepository>();
-builder.Services.AddScoped<WorkoutService>();
+// Add services to the container.
 
-// Controller
 builder.Services.AddControllers();
-
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Workout API", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Usa Swagger solo in Development (opzionale)
-if (app.Environment.IsDevelopment())
-{
+MigrationService.InitializeMigrate(app);
+// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
+
+//app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 app.MapControllers();
-//app.MapGet("/", () => "Hello World!");
+
+app.MapWorkoutEndpoints();
 
 app.Run();
-

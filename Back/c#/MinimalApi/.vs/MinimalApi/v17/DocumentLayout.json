@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "X:\\GitHub\\EpochSport\\Back\\c#\\MinimalApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5FCCA48-BE08-4A58-A933-688ADD25A222}|MinimalApi\\MinimalApi.csproj|x:\\github\\epochsport\\back\\c#\\minimalapi\\minimalapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5FCCA48-BE08-4A58-A933-688ADD25A222}|MinimalApi\\MinimalApi.csproj|solutionrelative:minimalapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "X:\\GitHub\\EpochSport\\Back\\c#\\MinimalApi\\MinimalApi\\Program.cs",
+              "RelativeDocumentMoniker": "MinimalApi\\Program.cs",
+              "ToolTip": "X:\\GitHub\\EpochSport\\Back\\c#\\MinimalApi\\MinimalApi\\Program.cs",
+              "RelativeToolTip": "MinimalApi\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAMwC4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T14:39:19.738Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
