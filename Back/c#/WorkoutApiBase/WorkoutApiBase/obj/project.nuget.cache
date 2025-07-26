@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "57imml+g3hQ=",
+  "dgSpecHash": "cVv4zgVU9pg=",
   "success": true,
-  "projectFilePath": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\WorkoutApiBase.csproj",
+  "projectFilePath": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\WorkoutApiBase.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmaio\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\mmaio\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

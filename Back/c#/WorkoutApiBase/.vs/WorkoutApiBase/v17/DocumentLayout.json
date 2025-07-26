@@ -1,13 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\",
+  "WorkspaceRootPath": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|x:\\github\\epochsport\\back\\c#\\workoutapibase\\workoutapibase\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|c:\\users\\mmaio\\documents\\github\\epochsport\\back\\c#\\workoutapibase\\workoutapibase\\workout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|solutionrelative:workoutapibase\\workout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|c:\\users\\mmaio\\documents\\github\\epochsport\\back\\c#\\workoutapibase\\workoutapibase\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|solutionrelative:workoutapibase\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|x:\\github\\epochsport\\back\\c#\\workoutapibase\\workoutapibase\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|c:\\users\\mmaio\\documents\\github\\epochsport\\back\\c#\\workoutapibase\\workoutapibase\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9C633F7B-B829-46FD-9262-AD20E8D08F1F}|WorkoutApiBase\\WorkoutApiBase.csproj|solutionrelative:workoutapibase\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -23,28 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Workout.cs",
+              "DocumentMoniker": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Workout.cs",
+              "RelativeDocumentMoniker": "WorkoutApiBase\\Workout.cs",
+              "ToolTip": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Workout.cs",
+              "RelativeToolTip": "WorkoutApiBase\\Workout.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T10:59:45.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Program.cs",
               "RelativeDocumentMoniker": "WorkoutApiBase\\Program.cs",
-              "ToolTip": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Program.cs",
+              "ToolTip": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\Program.cs",
               "RelativeToolTip": "WorkoutApiBase\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-07T18:22:17.782Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
-              "DocumentMoniker": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\appsettings.json",
               "RelativeDocumentMoniker": "WorkoutApiBase\\appsettings.json",
-              "ToolTip": "X:\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\appsettings.json",
+              "ToolTip": "C:\\Users\\mmaio\\Documents\\GitHub\\EpochSport\\Back\\c#\\WorkoutApiBase\\WorkoutApiBase\\appsettings.json",
               "RelativeToolTip": "WorkoutApiBase\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-07T17:56:51.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-07T17:56:51.675Z"
             }
           ]
         }
