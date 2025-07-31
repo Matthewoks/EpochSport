@@ -2,33 +2,20 @@ package com.matthewoks.firstStep.Models;
 
 import java.util.List;
 
-public class Workout {
-    private int Id;
-    private String Name;
+public class Workout extends Meet {
+
+
     private String Color;
     private List<String> Exercises;
 
-    public Workout(int id, String name, String color, List<String> exercises) {
-        Id = id;
-        Name = name;
+    public Workout() {
+        super();
+    }
+
+    public Workout(int id, String meetName, String color, List<String> exercises) {
+        super(id, meetName);
         Color = color;
         Exercises = exercises;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
     }
 
     public String getColor() {
@@ -50,10 +37,8 @@ public class Workout {
     @Override
     public String toString() {
         return "Workout{" +
-                "Id=" + Id +
-                ", Name='" + Name + '\'' +
-                ", Color='" + Color + '\'' +
+                "Color='" + Color + '\'' +
                 ", Exercises=" + Exercises +
-                '}';
+                "} " + super.toString();
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/workout")
+@RequestMapping("api/workouts")
 public class WorkoutController {
 
     @Autowired
