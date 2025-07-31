@@ -1,22 +1,30 @@
 package com.matthewoks.firstStep.Models;
 
 public abstract class Meet {
-    private int id;
-    private String meetName;
+    protected int Id;
+    protected String color;
+    protected String meetName;
 public Meet(){}
 
-    public Meet(int id, String meetName) {
+    public Meet(int id,String color, String meetName) {
     super();
-        this.id = id;
+        this.Id=id;
         this.meetName = meetName;
+        this.color = color;
     }
-
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
+    }
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getMeetName() {
@@ -26,7 +34,7 @@ public Meet(){}
     @Override
     public String toString() {
         return "Meet{" +
-                "id=" + id +
+                "color=" + color +
                 ", meetName='" + meetName + '\'' +
                 '}';
     }
