@@ -3,6 +3,7 @@ package com.matthewoks.firstStep.Repositories;
 
 import com.matthewoks.firstStep.Models.Equipment;
 import com.matthewoks.firstStep.Models.Exercise;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositoryWrite<Exercise> {
     @Override
     public Exercise getById(int id) {
@@ -17,7 +19,18 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "SELECT id, name, category FROM exercises WHERE id = ? ";
+            String sqlTxt = "SELECT id, " +
+                    "name,  " +
+                    "description,  " +
+                    "color,  " +
+                    "image_url,  " +
+                    "duration,  " +
+                    "repetitions,  " +
+                    "sets,  " +
+                    "rest_time,  " +
+                    "execution_mode,  " +
+                    "intensity_level  "+ 
+                    "FROM exercises WHERE id = ? ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
@@ -28,18 +41,18 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
                 ex.setName(rs.getString("name"));
                 ex.setDescription(rs.getString("description"));
                 ex.setColor(rs.getString("color"));
-                ex.setImageUrl(rs.getString("imageUrl"));
-                ex.setDuration(rs.getFloat("duration"));
+                ex.setImageUrl(rs.getString("image_url"));
+                ex.setDuration(rs.getInt("duration"));
                 ex.setRepetitions(rs.getInt("repetitions"));
                 ex.setSets(rs.getInt("sets"));
-                ex.setRestTime(rs.getFloat("restTime"));
-                ex.setExecutionMode(rs.getString("executionMode"));
-                ex.setIntensityLevel(rs.getInt("intensityLevel"));
+                ex.setRestTime(rs.getInt("rest_time"));
+                ex.setExecutionMode(rs.getString("execution_mode"));
+                ex.setIntensityLevel(rs.getInt("intensity_level"));
 
-                sqlTxt = "SELECT T0.id, T0.name, T0.category, T0.imageUrl " +
+                sqlTxt = "SELECT T0.id, T0.name, T0.category, T0.image_url " +
                         " FROM equipments T0 " +
-                        " INNER JOIN exercises_equipments T1 ON T1.id_equipment = T0.id "+
-                        " WHERE T1.id_exercise = ? ";
+                        " INNER JOIN exercises_equipments T1 ON T1.equipment_id = T0.id " +
+                        " WHERE T1.exercise_id = ? ";
                 PreparedStatement psEq = conn.prepareStatement(sqlTxt);
                 psEq.setLong(1,id);
                 ResultSet rsEq = psEq.executeQuery();
@@ -49,7 +62,7 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
                             eq.setId(rsEq.getLong("id"));
                             eq.setName(rsEq.getString("name"));
                             eq.setCategory(rsEq.getString("category"));
-                            eq.setImageUrl(rsEq.getString("imageUrl"));
+                            eq.setImageUrl(rsEq.getString("image_url"));
                     listEq.add(eq);
                 }
                 ex.setEquipments(listEq);
@@ -70,7 +83,18 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "SELECT id, name, category  FROM exercises ";
+            String sqlTxt = "SELECT id, " +
+                    "name, " +
+                    "description, " +
+                    "color, " +
+                    "image_url, " +
+                    "duration, " +
+                    "repetitions, " +
+                    "sets, " +
+                    "rest_time, " +
+                    "execution_mode, " +
+                    "intensity_level " +
+                    " FROM exercises ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
             ResultSet rs = ps.executeQuery();
 
@@ -80,17 +104,17 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
                 ex.setName(rs.getString("name"));
                 ex.setDescription(rs.getString("description"));
                 ex.setColor(rs.getString("color"));
-                ex.setImageUrl(rs.getString("imageUrl"));
-                ex.setDuration(rs.getFloat("duration"));
+                ex.setImageUrl(rs.getString("image_url"));
+                ex.setDuration(rs.getInt("duration"));
                 ex.setRepetitions(rs.getInt("repetitions"));
                 ex.setSets(rs.getInt("sets"));
-                ex.setRestTime(rs.getFloat("restTime"));
-                ex.setExecutionMode(rs.getString("executionMode"));
-                ex.setIntensityLevel(rs.getInt("intensityLevel"));
-                sqlTxt = "SELECT T0.id, T0.name, T0.category, T0.imageUrl " +
+                ex.setRestTime(rs.getInt("rest_time"));
+                ex.setExecutionMode(rs.getString("execution_mode"));
+                ex.setIntensityLevel(rs.getInt("intensity_level"));
+                sqlTxt = "SELECT T0.id, T0.name, T0.category, T0.image_url " +
                         " FROM equipments T0 " +
-                        " INNER JOIN exercises_equipments T1 ON T1.id_equipment = T0.id "+
-                        " WHERE T1.id_exercise = ? ";
+                        " INNER JOIN exercises_equipments T1 ON T1.equipment_id = T0.id "+
+                        " WHERE T1.exercise_id = ? ";
                 PreparedStatement psEq = conn.prepareStatement(sqlTxt);
                 psEq.setLong(1,rs.getLong("id"));
                 ResultSet rsEq = psEq.executeQuery();
@@ -100,7 +124,7 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
                     eq.setId(rsEq.getLong("id"));
                     eq.setName(rsEq.getString("name"));
                     eq.setCategory(rsEq.getString("category"));
-                    eq.setImageUrl(rsEq.getString("imageUrl"));
+                    eq.setImageUrl(rsEq.getString("image_url"));
                     listEq.add(eq);
                 }
                 ex.setEquipments(listEq);
@@ -123,11 +147,32 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "INSERT INTO exercises(name, category) VALUES (?,?)";
+            String sqlTxt = "INSERT INTO exercises(name, " +
+                    "description," +
+                    "color," +
+                    "image_url," +
+                    "duration," +
+                    "repetitions," +
+                    "sets," +
+                    "rest_time," +
+                    "execution_mode," +
+                    "intensity_level) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
 
             ps.setString(1,obj.getName());
             ps.setString(2,obj.getDescription());
+            ps.setString(3,obj.getColor());
+            ps.setString(4,obj.getImageUrl());
+            ps.setInt(5,obj.getDuration());
+            ps.setInt(6,obj.getRepetitions());
+            ps.setInt(7,obj.getSets());
+            ps.setInt(8,obj.getRestTime());
+            ps.setString(9,obj.getExecutionMode());
+            ps.setInt(10,obj.getIntensityLevel());
+
+
+
 
             int affRows = ps.executeUpdate();
             if(affRows>0)result = true;

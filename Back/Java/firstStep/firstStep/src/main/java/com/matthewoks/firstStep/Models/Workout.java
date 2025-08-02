@@ -12,16 +12,20 @@ public class Workout extends Meet {
         super();
     }
 
-    public Workout(int id, String meetName, String color, List<Exercise> exercises) {
+    public Workout(Long id, String meetName, String color, List<Exercise> exercises) {
         super(id,meetName,color);
         this.exercises=exercises;
 
 
     }
 
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
 
-
-
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
 
     @Override
     public String toString() {

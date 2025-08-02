@@ -1,5 +1,7 @@
 package com.matthewoks.firstStep.Repositories;
 
+import com.matthewoks.firstStep.Models.Equipment;
+import com.matthewoks.firstStep.Models.Exercise;
 import com.matthewoks.firstStep.Models.Workout;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.stereotype.Repository;
@@ -18,17 +20,48 @@ public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWr
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "SELECT id, name, color, exercises_json  FROM workouts WHERE id = ? ";
+            String sqlTxt = "SELECT id, name, color  FROM workouts WHERE id = ? ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
                 wo= new Workout();
-                wo.setId(rs.getInt("id"));
+                wo.setId(rs.getLong("id"));
                 wo.setMeetName(rs.getString("name"));
                 wo.setColor(rs.getString("color"));
-
+                sqlTxt = "SELECT id, " +
+                        "name,  " +
+                        "description,  " +
+                        "color,  " +
+                        "image_url,  " +
+                        "duration,  " +
+                        "repetitions,  " +
+                        "sets,  " +
+                        "rest_time,  " +
+                        "execution_mode,  " +
+                        "intensity_level  "+
+                        "FROM exercises WHERE id = ? ";
+                PreparedStatement psEx = conn.prepareStatement(sqlTxt);
+                psEx.setLong(1,id);
+                ResultSet rsEx = psEx.executeQuery();
+                List<Exercise> listEx = new ArrayList<Exercise>();
+                while (rsEx.next()) {
+                    Exercise ex = new Exercise();
+                    ex.setId(rsEx.getLong("id"));
+                    ex.setName(rsEx.getString("name"));
+                    ex.setDescription(rsEx.getString("description"));
+                    ex.setColor(rsEx.getString("color"));
+                    ex.setImageUrl(rsEx.getString("image_url"));
+                    ex.setDuration(rsEx.getInt("duration"));
+                    ex.setRepetitions(rsEx.getInt("repetitions"));
+                    ex.setSets(rsEx.getInt("sets"));
+                    ex.setRestTime(rsEx.getInt("rest_time"));
+                    ex.setExecutionMode(rsEx.getString("execution_mode"));
+                    ex.setIntensityLevel(rsEx.getInt("intensity_level"));
+                    listEx.add(ex);
+                }
+                wo.setExercises(listEx);
             }
             conn.close();
         } catch (Exception e) {
@@ -48,15 +81,47 @@ public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWr
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "SELECT id, name, color, exercises_json  FROM workouts ";
+            String sqlTxt = "SELECT id, name, color  FROM workouts ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
                 Workout wo= new Workout();
-                wo.setId(rs.getInt("id"));
+                wo.setId(rs.getLong("id"));
                 wo.setMeetName(rs.getString("name"));
                 wo.setColor(rs.getString("color"));
+                sqlTxt = "SELECT id, " +
+                        "name,  " +
+                        "description,  " +
+                        "color,  " +
+                        "image_url,  " +
+                        "duration,  " +
+                        "repetitions,  " +
+                        "sets,  " +
+                        "rest_time,  " +
+                        "execution_mode,  " +
+                        "intensity_level  "+
+                        "FROM exercises WHERE id = ? ";
+                PreparedStatement psEx = conn.prepareStatement(sqlTxt);
+                psEx.setLong(1,rs.getLong("id"));
+                ResultSet rsEx = psEx.executeQuery();
+                List<Exercise> listEx = new ArrayList<Exercise>();
+                while (rsEx.next()) {
+                    Exercise ex = new Exercise();
+                    ex.setId(rsEx.getLong("id"));
+                    ex.setName(rsEx.getString("name"));
+                    ex.setDescription(rsEx.getString("description"));
+                    ex.setColor(rsEx.getString("color"));
+                    ex.setImageUrl(rsEx.getString("image_url"));
+                    ex.setDuration(rsEx.getInt("sets"));
+                    ex.setRepetitions(rsEx.getInt("sets"));
+                    ex.setSets(rsEx.getInt("sets"));
+                    ex.setRestTime(rsEx.getInt("rest_time"));
+                    ex.setExecutionMode(rsEx.getString("execution_mode"));
+                    ex.setIntensityLevel(rsEx.getInt("intensity_level"));
+                    listEx.add(ex);
+                }
+                wo.setExercises(listEx);
                 list.add(wo);
             }
             conn.close();

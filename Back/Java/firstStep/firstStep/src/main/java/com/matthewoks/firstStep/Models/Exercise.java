@@ -3,10 +3,10 @@ package com.matthewoks.firstStep.Models;
 import java.util.List;
 
 public class Exercise extends PlannedAction {
-    private float duration;
+    private int duration;
     private int repetitions;
     private int sets;
-    private float restTime;
+    private int restTime;
     private String executionMode;
     private List<Equipment> equipments;
     private int intensityLevel;
@@ -15,7 +15,7 @@ public class Exercise extends PlannedAction {
 
     }
 
-    public Exercise(Long id, String name, String description, String color, String imageUrl, float duration, int repetitions, int sets, float restTime, String executionMode, List<Equipment> equipments, int intensityLevel) {
+    public Exercise(Long id, String name, String description, String color, String imageUrl, int duration, int repetitions, int sets, int restTime, String executionMode, List<Equipment> equipments, int intensityLevel) {
         super(id, name, description, color, imageUrl);
         this.duration = duration;
         this.repetitions = repetitions;
@@ -26,11 +26,11 @@ public class Exercise extends PlannedAction {
         this.intensityLevel = intensityLevel;
     }
 
-    public float getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -50,11 +50,11 @@ public class Exercise extends PlannedAction {
         this.sets = sets;
     }
 
-    public float getRestTime() {
+    public int getRestTime() {
         return restTime;
     }
 
-    public void setRestTime(float restTime) {
+    public void setRestTime(int restTime) {
         this.restTime = restTime;
     }
 

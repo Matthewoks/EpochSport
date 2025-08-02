@@ -78,11 +78,12 @@ public class EquipmentRepository implements IRepositoryRead<Equipment>,IReposito
         try {
             Connection conn =  ConnectionSingleton.getInstance().getConnection();
 
-            String sqlTxt = "INSERT INTO equipments(name, category) VALUES (?,?)";
+            String sqlTxt = "INSERT INTO equipments(name, category,image_url) VALUES (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
 
             ps.setString(1,obj.getName());
             ps.setString(2,obj.getCategory());
+            ps.setString(3,obj.getImageUrl());
 
             int affRows = ps.executeUpdate();
             if(affRows>0)result = true;
