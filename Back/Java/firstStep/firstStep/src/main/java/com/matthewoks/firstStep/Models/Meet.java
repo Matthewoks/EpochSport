@@ -1,9 +1,9 @@
 package com.matthewoks.firstStep.Models;
 
 public abstract class Meet {
-    protected int Id;
-    protected String color;
-    protected String meetName;
+    private int Id;
+    private String color;
+    private String meetName;
 public Meet(){}
 
     public Meet(int id,String color, String meetName) {

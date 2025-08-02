@@ -20,9 +20,9 @@ public class WorkoutService {
 
     private List<Workout> workouts = new ArrayList<Workout>() {
         {
-            add(new Workout(1, "Petto", "Blue"));
-            add(new Workout(2, "Schiena", "Red"));
-            add(new Workout(3, "Gambe", "Violet"));
+//            add(new Workout(1, "Petto", "Blue"));
+//            add(new Workout(2, "Schiena", "Red"));
+//            add(new Workout(3, "Gambe", "Violet"));
 
 
         }
