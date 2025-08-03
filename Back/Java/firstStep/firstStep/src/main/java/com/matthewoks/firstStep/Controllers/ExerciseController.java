@@ -38,4 +38,11 @@ public class ExerciseController {
         if(insertResult) return ResponseEntity.ok().build();
         else return ResponseEntity.unprocessableEntity().build();
     }
+
+    @DeleteMapping("{varId}")
+    public ResponseEntity exDelete(@PathVariable int varId){
+        boolean deleteResult = service.exDeleteService(varId);
+        if(deleteResult) return ResponseEntity.ok().build();
+        else return ResponseEntity.unprocessableEntity().build();
+    }
 }

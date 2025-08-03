@@ -29,4 +29,8 @@ public class ExerciseService {
         return repo.Insert(ex);
 
     }
+
+    public boolean exDeleteService(int id){
+        return repo.Delete(id);
+    }
 }

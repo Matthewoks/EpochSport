@@ -192,7 +192,26 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
     }
 
     @Override
-    public boolean Delete(Exercise obj) {
-        return false;
+    public boolean Delete(int id) {
+        boolean result = false;
+        try {
+            Connection conn =  ConnectionSingleton.getInstance().getConnection();
+
+            String sqlTxt = "DELETE FROM exercises WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(sqlTxt);
+
+            ps.setInt(1,id);
+
+
+            int affRows = ps.executeUpdate();
+            if(affRows>0)result = true;
+
+
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 }

@@ -38,4 +38,11 @@ public class EquipmentController {
         if(insertResult) return ResponseEntity.ok().build();
         else return ResponseEntity.unprocessableEntity().build();
     }
+
+    @DeleteMapping("{varId}")
+    public ResponseEntity eqDelete(@PathVariable int varId) {
+        boolean deleteResult = service.eqDeleteService(varId);
+        if (deleteResult) return ResponseEntity.ok().build();
+        else return ResponseEntity.unprocessableEntity().build();
+    }
 }

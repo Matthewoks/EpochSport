@@ -25,6 +25,8 @@ public class EquipmentService {
     }
     public boolean eqInsertService(Equipment eq){
         return repo.Insert(eq);
-
+    }
+    public boolean eqDeleteService(int id){
+        return repo.Delete(id);
     }
 }

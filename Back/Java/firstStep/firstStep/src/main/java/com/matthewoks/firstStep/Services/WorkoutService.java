@@ -46,4 +46,8 @@ public class WorkoutService {
 //        workouts.add(wo);
 //        return wo;
     }
+
+    public boolean woDeleteService(int id){
+        return repo.Delete(id);
+    }
 }

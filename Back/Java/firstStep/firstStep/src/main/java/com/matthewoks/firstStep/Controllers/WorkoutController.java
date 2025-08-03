@@ -44,6 +44,13 @@ public class WorkoutController {
       else return ResponseEntity.unprocessableEntity().build();
     }
 
+    @DeleteMapping("{varId}")
+    public ResponseEntity woDelete(@PathVariable int varId){
+      boolean deleteResult = service.woDeleteService(varId);
+      if(deleteResult) return ResponseEntity.ok().build();
+      else return ResponseEntity.unprocessableEntity().build();
+    }
+
 
 
 
