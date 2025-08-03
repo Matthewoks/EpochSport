@@ -5,6 +5,7 @@ import com.matthewoks.firstStep.Models.Equipment;
 import com.matthewoks.firstStep.Models.Exercise;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +14,20 @@ import java.util.List;
 
 @Repository
 public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositoryWrite<Exercise> {
+
+    private final DataSource ds;
+
+    public ExerciseRepository(DataSource ds) {
+        this.ds = ds;
+    }
+
     @Override
-    public Exercise getById(int id) {
+    public Exercise getById(long id) {
         Exercise ex =null;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "SELECT id, " +
                     "name,  " +
                     "description,  " +
@@ -32,7 +41,7 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
                     "intensity_level  "+ 
                     "FROM exercises WHERE id = ? ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
-            ps.setInt(1,id);
+            ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
@@ -81,8 +90,9 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
         List<Exercise> list = new ArrayList<Exercise>();
 
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "SELECT id, " +
                     "name, " +
                     "description, " +
@@ -145,8 +155,9 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
     public boolean Insert(Exercise obj) {
         boolean result = false;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "INSERT INTO exercises(name, " +
                     "description," +
                     "color," +
@@ -195,8 +206,9 @@ public class ExerciseRepository  implements IRepositoryRead<Exercise>,IRepositor
     public boolean Delete(int id) {
         boolean result = false;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "DELETE FROM exercises WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
 

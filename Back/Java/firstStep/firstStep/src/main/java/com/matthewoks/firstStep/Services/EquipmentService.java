@@ -19,12 +19,15 @@ public class EquipmentService {
     }
 
     //restituisce un solo
-    public Equipment eqDetailsService(int id){
+    public Equipment eqDetailsService(long id){
         return repo.getById(id);
         // return workouts.stream().filter(p->p.getId()==id).findFirst().orElse(null);
     }
     public boolean eqInsertService(Equipment eq){
         return repo.Insert(eq);
+    }
+    public boolean eqUpdateService(Equipment eq){
+        return repo.Update(eq);
     }
     public boolean eqDeleteService(int id){
         return repo.Delete(id);

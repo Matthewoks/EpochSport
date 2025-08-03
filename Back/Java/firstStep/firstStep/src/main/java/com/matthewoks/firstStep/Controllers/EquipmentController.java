@@ -17,7 +17,7 @@ public class EquipmentController {
     private EquipmentService service;
 
     @GetMapping("{varId}")
-    public ResponseEntity eqDetails(@PathVariable int varId){
+    public ResponseEntity eqDetails(@PathVariable long varId){
         Equipment eq = service.eqDetailsService(varId);
         if(eq!=null) return ResponseEntity.ok(eq);
         else return ResponseEntity.notFound().build();
@@ -34,15 +34,28 @@ public class EquipmentController {
 
     @PostMapping
     public ResponseEntity eqInsert(@RequestBody Equipment eq){
-        boolean insertResult = service.eqInsertService(eq);
-        if(insertResult) return ResponseEntity.ok().build();
+        if(eq != null) {
+        if(service.eqInsertService(eq)) return ResponseEntity.ok().build();
         else return ResponseEntity.unprocessableEntity().build();
+        } else return ResponseEntity.unprocessableEntity().build();
+    }
+
+    @PatchMapping("{varId}")
+    public ResponseEntity eqUpdate(@PathVariable long varId, @RequestBody Equipment eq){
+        if(varId!=0){
+            eq.setId(varId);
+            if(service.eqUpdateService(eq)) return ResponseEntity.ok().build();
+            else return ResponseEntity.unprocessableEntity().build();
+        } else return ResponseEntity.unprocessableEntity().build();
+
+
     }
 
     @DeleteMapping("{varId}")
     public ResponseEntity eqDelete(@PathVariable int varId) {
-        boolean deleteResult = service.eqDeleteService(varId);
-        if (deleteResult) return ResponseEntity.ok().build();
-        else return ResponseEntity.unprocessableEntity().build();
+        if(varId!=0) {
+            if (service.eqDeleteService(varId)) return ResponseEntity.ok().build();
+            else return ResponseEntity.unprocessableEntity().build();
+        } else return ResponseEntity.unprocessableEntity().build();
     }
 }

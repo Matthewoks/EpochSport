@@ -6,6 +6,7 @@ import com.matthewoks.firstStep.Models.Workout;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,15 +15,22 @@ import java.util.List;
 
 @Repository
 public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWrite<Workout> {
+    private final DataSource ds;
+
+    public WorkoutRepository(DataSource ds) {
+        this.ds = ds;
+    }
+
     @Override
-    public Workout getById(int id) {
+    public Workout getById(long id) {
         Workout wo =null;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "SELECT id, name, color  FROM workouts WHERE id = ? ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
-            ps.setInt(1,id);
+            ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
@@ -79,8 +87,9 @@ public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWr
         List<Workout> list = new ArrayList<Workout>();
 
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "SELECT id, name, color  FROM workouts ";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
             ResultSet rs = ps.executeQuery();
@@ -139,8 +148,9 @@ public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWr
     public boolean Insert(Workout obj) {
         boolean result = false;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "INSERT INTO workouts(name, color) VALUES (?,?)";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
 
@@ -168,8 +178,9 @@ public class WorkoutRepository implements IRepositoryRead<Workout>,IRepositoryWr
     public boolean Delete(int id) {
         boolean result = false;
         try {
-            Connection conn =  ConnectionSingleton.getInstance().getConnection();
-
+            //utilizzo bean adesso
+            //  Connection conn =  ConnectionSingleton.getInstance().getConnection();
+            Connection conn = ds.getConnection();
             String sqlTxt = "DELETE FROM workouts WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlTxt);
 
