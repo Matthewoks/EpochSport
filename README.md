@@ -1,6 +1,6 @@
 # EpochSport
 ### Schede allenamento
-##### Abbiate pietà di me, amo programmare ma attualmente ho poco tempo libero.
+
 ##### La mia intenzione è la seguente:
 
 -in cartella back creare vari progetti in SpringBoot e ASP.NET con differenti difficoltà.
