@@ -37,6 +37,7 @@ public class UserController {
 
     @GetMapping("/combined/{username}/{lang}")
     public User getByUsernameAndLanguagePreference(@PathVariable String username, @PathVariable String lang){
+
         return repo.findByUsernameAndLanguagePreference(username,lang); //già disponibile senza fare nulla di particolare nella repo
     }//ricerca combinata
 
