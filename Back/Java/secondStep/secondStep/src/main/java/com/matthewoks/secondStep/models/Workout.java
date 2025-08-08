@@ -1,34 +1,31 @@
 package com.matthewoks.secondStep.models;
 
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name="workouts")
+@Data //getters, setters, tostring, equals, hashcode
+@NoArgsConstructor
 public class Workout extends Meet {
 
+    @ManyToMany
+    @JoinTable(
+            name = "workouts_exercises",
+            joinColumns = @JoinColumn(name = "workout_id"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_id")
+    )
+    private List<Exercise> exercises = new ArrayList<>();
+   //private Set<Exercise> exercises;
 
-   private List<Exercise> exercises;
 
-
-    public Workout() {
-        super();
-    }
-
-    public Workout(Long id, String meetName, String color, List<Exercise> exercises) {
-        super(id,meetName,color);
+    public Workout(Long id, String name, String color, List<Exercise> exercises) {
+        super(id,name,color);
         this.exercises=exercises;
-
-
-    }
-
-    public List<Exercise> getExercises() {
-        return exercises;
-    }
-
-    public void setExercises(List<Exercise> exercises) {
-        this.exercises = exercises;
-    }
-
-    @Override
-    public String toString() {
-        return "Workout{ } " + super.toString();
     }
 }

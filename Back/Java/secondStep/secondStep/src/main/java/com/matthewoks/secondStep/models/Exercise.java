@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="Equipments")
+@Table(name="exercises")
 @Data //getters, setters, tostring, equals, hashcode
 @NoArgsConstructor
 public class Exercise extends PlannedAction {
@@ -20,26 +21,37 @@ public class Exercise extends PlannedAction {
     private int restTime;
     @Column(name="execution_mode")
     private String executionMode;
+//    @ManyToMany(mappedBy = "exercises")
+//    @JoinTable(
+//            name = "exercises_equipments",
+//            joinColumns = @JoinColumn(name = "exercise_id"),
+//            inverseJoinColumns = @JoinColumn(name = "equipment_id")
+//    )
+//    private Set<Equipment> equipments;
+    @Column(name="intensity_level")
+    private int intensityLevel;
     @ManyToMany(mappedBy = "exercises")
+    private List<Workout> workouts = new ArrayList<>();
+
+    @ManyToMany
     @JoinTable(
             name = "exercises_equipments",
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "equipment_id")
     )
-    private Set<Equipment> equipments;
-    @Column(name="intensity_level")
-    private int intensityLevel;
+    private List<Equipment> equipments = new ArrayList<>();
 
 
 
-    public Exercise(Long id, String name, String description, String color, String imageUrl, int duration, int repetitions, int sets, int restTime, String executionMode, Set<Equipment> equipments, int intensityLevel) {
+    public Exercise(Long id, String name, String description, String color, String imageUrl, int duration, int repetitions, int sets, int restTime, String executionMode, //Set<Equipment> equipments,
+                     int intensityLevel) {
         super(id, name, description, color, imageUrl);
         this.duration = duration;
         this.repetitions = repetitions;
         this.sets = sets;
         this.restTime = restTime;
         this.executionMode = executionMode;
-        this.equipments = equipments;
+       // this.equipments = equipments;
         this.intensityLevel = intensityLevel;
     }
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 @Data //getters, setters, tostring, equals, hashcode
 @NoArgsConstructor //costruttore senzza argomenti
 @AllArgsConstructor

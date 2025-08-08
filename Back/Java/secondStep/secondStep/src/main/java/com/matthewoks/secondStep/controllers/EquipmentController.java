@@ -32,6 +32,12 @@ public class EquipmentController {
     public Equipment save(@RequestBody Equipment eq) {
         return repo.save(eq);
     }
+    @DeleteMapping("{varId}")
+    public void delete(@PathVariable int varId) {
+        if(varId!=0) repo.deleteById((long) varId);
+
+    }
+
 //    @GetMapping
 //    public ResponseEntity eqList(){
 //        List<Equipment> eqList = service.eqListService();
