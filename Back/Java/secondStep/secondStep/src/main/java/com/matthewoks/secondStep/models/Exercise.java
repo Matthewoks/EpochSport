@@ -33,14 +33,17 @@ public class Exercise extends PlannedAction {
     @ManyToMany(mappedBy = "exercises")
     private List<Workout> workouts = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "exercises_equipments",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id")
-    )
-    private List<Equipment> equipments = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "exercises_equipments",
+//            joinColumns = @JoinColumn(name = "exercise_id"),
+//            inverseJoinColumns = @JoinColumn(name = "equipment_id")
+//    )
+//    private List<Equipment> equipments = new ArrayList<>();
 
+    // Collegamento alla join table con equipments
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExerciseEquipment> exerciseEquipments = new ArrayList<>();
 
 
     public Exercise(Long id, String name, String description, String color, String imageUrl, int duration, int repetitions, int sets, int restTime, String executionMode, //Set<Equipment> equipments,

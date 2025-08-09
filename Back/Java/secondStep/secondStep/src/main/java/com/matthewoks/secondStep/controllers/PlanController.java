@@ -1,5 +1,7 @@
 package com.matthewoks.secondStep.controllers;
 
+import com.matthewoks.secondStep.dto.PlanFullDTO;
+import com.matthewoks.secondStep.dto.PlanIdOnlyDTO;
 import com.matthewoks.secondStep.models.Plan;
 import com.matthewoks.secondStep.services.PlanService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +20,30 @@ public class PlanController {
     private final PlanService planService;
 
     // 🔹 GET: tutte in range
+//    @GetMapping
+//    public List<Plan> getPlansInRange(
+//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
+//        return planService.getPlansInRange(start, end);
+//    }
     @GetMapping
-    public List<Plan> getPlansInRange(
+    public List<?> getPlansInRange(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
-        return planService.getPlansInRange(start, end);
-    }
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
+            @RequestParam(defaultValue = "false") boolean details) {
 
+        List<Plan> schedules = planService.getPlansInRange(start, end);
+
+        if (details) {
+            return schedules.stream()
+                    .map(PlanFullDTO::fromEntity)
+                    .toList();
+        } else {
+            return schedules.stream()
+                    .map(PlanIdOnlyDTO::fromEntity)
+                    .toList();
+        }
+    }
     // 🔹 GET: una sola
     @GetMapping("/{id}")
     public Plan getPlanById(@PathVariable Long id) {

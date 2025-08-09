@@ -22,7 +22,9 @@ public class Equipment {
     private String category;
     @Column(name="image_url")
     private String imageUrl;
-//
+//   @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<ExerciseEquipment> exerciseEquipments = new ArrayList<>();
+
 //    @ManyToMany(mappedBy = "equipments")
 //    private List<Exercise> exercises = new ArrayList<>();
     }

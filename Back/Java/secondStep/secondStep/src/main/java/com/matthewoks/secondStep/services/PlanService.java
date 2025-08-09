@@ -29,9 +29,11 @@ public class PlanService {
 
     // Aggiungere una singola
     public Plan addPlan(Plan plan) {
-        if (planRepository.findDuplicate(plan.getWorkout().getId(), plan.getUser().getId(), plan.getScheduledDate()) != null) {
+        if (plan.getId() != null)  throw new IllegalArgumentException("Non puoi specificare un ID per una nuova plan");
+
+        if (planRepository.findDuplicate(plan.getWorkout().getId(), plan.getUser().getId(), plan.getScheduledDate()) != null)
             throw new IllegalArgumentException("Questa Plan esiste già");
-        }
+
         return planRepository.save(plan);
     }
 
@@ -57,6 +59,7 @@ public class PlanService {
 
     // Aggiungere più Plan
     public List<Plan> addPlans(List<Plan> Plans) {
+
         return Plans.stream().map(this::addPlan).toList();
 
     }
@@ -71,11 +74,18 @@ public class PlanService {
 
     // Cancellarne più
     public void deletePlans(List<Long> ids) {
+        if (ids == null)  throw new IllegalArgumentException("Devi specificare una lista di ID per cancellare");
+
+
         ids.forEach(this::deletePlan);
     }
 
     // Aggiornamento parziale (PATCH)
     public Plan updatePartial(Long id, Plan updated) {
+        if (updated.getId() == null) {
+            throw new IllegalArgumentException("Devi specificare un ID per aggiornare un plan");
+        }
+
         Plan existing = getPlanById(id);
 
         if (updated.getWorkout() != null) {
