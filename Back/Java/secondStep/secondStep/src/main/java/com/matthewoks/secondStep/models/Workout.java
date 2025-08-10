@@ -26,8 +26,8 @@ public class Workout extends Meet {
    //private Set<Exercise> exercises;
 
 
-    public Workout(Long id, String name, String color, List<WorkoutExercise> exercises) {
-        super(id,name,color);
-        this.workoutExercises=exercises;
+    public Workout(Long id, String color, String meetName, List<WorkoutExercise> workoutExercises) {
+        super(id, color, meetName);
+        this.workoutExercises = workoutExercises;
     }
 }

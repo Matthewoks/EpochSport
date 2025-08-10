@@ -1,10 +1,12 @@
 package com.matthewoks.secondStep.controllers;
 
+import com.matthewoks.secondStep.dto.ExerciseDTO;
 import com.matthewoks.secondStep.models.Exercise;
 
 import com.matthewoks.secondStep.models.User;
 import com.matthewoks.secondStep.models.Workout;
 import com.matthewoks.secondStep.repositories.ExerciseRepository;
+import com.matthewoks.secondStep.services.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +17,31 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/exercises")
 public class ExerciseController {
-
+    @Autowired
+    private ExerciseService service;
     @Autowired
     private ExerciseRepository repo;
 
     @GetMapping
-    public List<Exercise> getAll(){
-        return repo.findAll();
+    public List<ExerciseDTO> getAll(){
+        return service.getAllExercises();
+    }
+    @GetMapping("/raw")
+    public List<ExerciseDTO> getRawExercises() {
+        List<ExerciseDTO> exercises = service.getAllExercises();
+        System.out.println("Esercizi letti: " + exercises.size());
+        return exercises;
     }
 
     @GetMapping("/{id}")
-    public Optional<Exercise> getById(@PathVariable int id){
-        return repo.findById((long)id);
+    public Optional<ExerciseDTO> getById(@PathVariable int id){
+        return service.getExerciseById((long)id);
     }
+
+//    @GetMapping("/{id}")
+//    public Optional<Exercise> getById(@PathVariable int id){
+//        return repo.findById((long)id);
+//    }
     @PostMapping
     public Exercise save(@RequestBody Exercise ex) {
         return repo.save(ex);

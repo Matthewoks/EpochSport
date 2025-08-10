@@ -16,14 +16,14 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer sets;
-    private Integer reps;
+//    private Integer sets;
+//    private Integer reps;
 
     @ManyToOne
-    @JoinColumn(name = "workout_id")
+    @JoinColumn(name = "workout_id", nullable = false)
     private Workout workout;
 
     @ManyToOne
-    @JoinColumn(name = "exercise_id")
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 }
