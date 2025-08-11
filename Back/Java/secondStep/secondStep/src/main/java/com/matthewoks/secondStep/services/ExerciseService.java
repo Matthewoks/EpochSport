@@ -24,7 +24,9 @@ public class ExerciseService {
         dto.setName(exercise.getName());
         dto.setEquipments(
                 exercise.getExerciseEquipments().stream()
-                        .map(eq -> new EquipmentDTO(eq.getEquipment().getId(), eq.getEquipment().getName()))
+                        .map(eq -> new EquipmentDTO(
+                                eq.getEquipment().getId(),
+                                eq.getEquipment().getName()))
                         .toList()
         );
         return dto;

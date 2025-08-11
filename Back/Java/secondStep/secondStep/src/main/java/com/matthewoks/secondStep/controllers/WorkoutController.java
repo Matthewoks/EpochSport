@@ -1,9 +1,11 @@
 package com.matthewoks.secondStep.controllers;
 
+import com.matthewoks.secondStep.dto.WorkoutDTO;
 import com.matthewoks.secondStep.models.Exercise;
 import com.matthewoks.secondStep.models.User;
 import com.matthewoks.secondStep.models.Workout;
 import com.matthewoks.secondStep.repositories.WorkoutRepository;
+import com.matthewoks.secondStep.services.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,20 +19,32 @@ public class WorkoutController {
 
     @Autowired
     private WorkoutRepository repo; //secondo esempio di DI ostituisce l'immissione nel costruttore dentro controller e lo utilizza quando serve
+    @Autowired
+    private WorkoutService service;
 
-    @GetMapping
-    public List<Workout> getAll(){
-        return repo.findAll();
-    }
-
+//
+//    @GetMapping
+//    public List<Workout> getAll(){
+//        return repo.findAll();
+//    }
     @GetMapping("/{id}")
-    public Optional<Workout> getById(@PathVariable int id){
-        return repo.findById((long)id);
+    public Optional<WorkoutDTO> getById(@PathVariable int id){
+        return service.getWorkoutById((long)id);
     }
+//    @GetMapping("/{id}")
+//    public Optional<Workout> getById(@PathVariable int id){
+//        return repo.findById((long)id);
+//    }
 
     @PostMapping
     public Workout save(@RequestBody Workout wo) {
         return repo.save(wo);
+    }
+
+
+    @GetMapping
+    public List<WorkoutDTO> getAllWorkouts() {
+        return service.getAllWorkouts();
     }
 //
 //    @PostMapping
