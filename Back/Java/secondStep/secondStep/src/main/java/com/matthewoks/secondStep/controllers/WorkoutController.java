@@ -41,6 +41,10 @@ public class WorkoutController {
         return repo.save(wo);
     }
 
+    @DeleteMapping("{varId}")
+    public void delete(@PathVariable int varId) {
+        if(varId!=0) repo.deleteById((long) varId);
+    }
 
     @GetMapping
     public List<WorkoutDTO> getAllWorkouts() {

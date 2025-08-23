@@ -35,7 +35,6 @@ public class EquipmentController {
     @DeleteMapping("{varId}")
     public void delete(@PathVariable int varId) {
         if(varId!=0) repo.deleteById((long) varId);
-
     }
 
 //    @GetMapping
