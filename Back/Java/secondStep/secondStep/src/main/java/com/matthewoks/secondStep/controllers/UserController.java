@@ -47,6 +47,11 @@ public class UserController {
         //se non utilizzo Optional return repo.findById((long)id).orElse(null);
     }
 
+    @DeleteMapping("{varId}")
+    public void delete(@PathVariable int varId) {
+        if(varId!=0) repo.deleteById((long) varId);
+    }
+
     @PostMapping
     public User save(@RequestBody User us){
         return repo.save(us); //salva e rende l'oggetto creato

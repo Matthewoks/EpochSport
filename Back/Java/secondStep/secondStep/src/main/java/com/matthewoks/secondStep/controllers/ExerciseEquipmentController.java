@@ -1,16 +1,18 @@
 package com.matthewoks.secondStep.controllers;
 
 import com.matthewoks.secondStep.dto.ExerciseEquipmentDTO;
+import com.matthewoks.secondStep.dto.ExerciseEquipmentResponseDTO;
 import com.matthewoks.secondStep.models.ExerciseEquipment;
 import com.matthewoks.secondStep.services.ExerciseEquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/exercise-equipment")
+@RequestMapping("/api/ ")
 public class ExerciseEquipmentController {
 
     @Autowired
@@ -32,8 +34,10 @@ public class ExerciseEquipmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
+
+
     @PostMapping("/multiple")
-    public List<ExerciseEquipment> addMultiple(@RequestBody List<ExerciseEquipment> list) {
+    public List<ExerciseEquipmentResponseDTO> addMultiple(@RequestBody List<ExerciseEquipmentDTO> list) {
         return service.addMultiple(list);
     }
     @PostMapping("/solo")

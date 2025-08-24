@@ -17,14 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanController {
 
-    private final PlanService planService;
+    private final PlanService service;
 
-    // 🔹 GET: tutte in range
 //    @GetMapping
 //    public List<Plan> getPlansInRange(
 //            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
 //            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
-//        return planService.getPlansInRange(start, end);
+//        return service.getPlansInRange(start, end);
 //    }
     @GetMapping
     public List<?> getPlansInRange(
@@ -32,7 +31,7 @@ public class PlanController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
             @RequestParam(defaultValue = "false") boolean details) {
 
-        List<Plan> schedules = planService.getPlansInRange(start, end);
+        List<Plan> schedules = service.getPlansInRange(start, end);
 
         if (details) {
             return schedules.stream()
@@ -44,28 +43,29 @@ public class PlanController {
                     .toList();
         }
     }
-    // 🔹 GET: una sola
+
     @GetMapping("/{id}")
     public Plan getPlanById(@PathVariable Long id) {
-        return planService.getPlanById((Long)id);
+        return service.getPlanById((Long)id);
     }
 
-    // 🔹 POST: una o più
+
     @PostMapping
     public List<Plan> addPlans(@RequestBody List<Plan> Plans) {
-        return planService.addPlans(Plans);
+        return service.addPlans(Plans);
     }
 
-    // 🔹 DELETE: una o più
+
     @DeleteMapping
     public ResponseEntity<Void> deletePlans(@RequestBody List<Long> ids) {
-        planService.deletePlans(ids);
+        service.deletePlans(ids);
         return ResponseEntity.noContent().build();
     }
 
-    // 🔹 PATCH: aggiornamento parziale
+
+    //PATCH: aggiornamento parziale
     @PatchMapping("/{id}")
     public Plan updatePartial(@PathVariable Long id, @RequestBody Plan updated) {
-        return planService.updatePartial(id, updated);
+        return service.updatePartial(id, updated);
     }
 }

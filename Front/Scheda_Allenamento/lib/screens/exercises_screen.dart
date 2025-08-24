@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'add_exercise_screen.dart'; // il primo step del flow add exercise
+import 'add_exercise_screen.dart';
+import 'exercises_details_screen.dart'; // il primo step del flow add exercise
 
 class Exercise {
   final int id;
@@ -91,10 +92,17 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         title: const Text('Seleziona un\'azione'),
         children: [
           SimpleDialogOption(
+            child: const Text('Dettagli'),
+            onPressed: () {
+              Navigator.pop(context);
+              _details(ex.id);
+            },
+          ),
+          SimpleDialogOption(
             child: const Text('Modifica'),
             onPressed: () {
               Navigator.pop(context);
-              // qui puoi aggiungere la logica di modifica
+              // aggiungere la logica di modifica
             },
           ),
           SimpleDialogOption(
@@ -108,7 +116,14 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       ),
     );
   }
-
+  void _details(int id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ExercisesDetailsScreen(exerciseId: id), //sarebbe meglio passare l'oggetto con tutte le info
+      ),
+    );
+  }
   void _confirmDelete(int id) {
     showDialog(
       context: context,
@@ -176,6 +191,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             setState(() {
               _exercises = fetchExercises();
             });
+
+
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Row(

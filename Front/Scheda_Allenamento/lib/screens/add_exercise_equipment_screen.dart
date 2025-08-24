@@ -61,9 +61,9 @@ class _AddExerciseEquipmentScreenState extends State<AddExerciseEquipmentScreen>
       return;
     }
 
-    final url = Uri.parse('http://10.0.2.2:1111/api/exercises_equipments');
+    final url = Uri.parse('http://10.0.2.2:1111/api/exercise-equipment/multiple');
     final body = jsonEncode(_selectedEquipmentIds
-        .map((id) => {"exercise_id": widget.exerciseId, "equipment_id": id})
+        .map((id) => {"exerciseId": widget.exerciseId, "equipmentId": id})
         .toList());
 
     try {
