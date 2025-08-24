@@ -2,13 +2,9 @@ package com.matthewoks.secondStep.controllers;
 
 import com.matthewoks.secondStep.dto.ExerciseDTO;
 import com.matthewoks.secondStep.models.Exercise;
-
-import com.matthewoks.secondStep.models.User;
-import com.matthewoks.secondStep.models.Workout;
 import com.matthewoks.secondStep.repositories.ExerciseRepository;
 import com.matthewoks.secondStep.services.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,7 +42,13 @@ public class ExerciseController {
     public Exercise save(@RequestBody Exercise ex) {
         return repo.save(ex);
     }
-//    @GetMapping("{varId}")
+
+    @DeleteMapping("{varId}")
+    public void delete(@PathVariable int varId) {
+        if(varId!=0) repo.deleteById((long) varId);
+    }
+
+    //    @GetMapping("{varId}")
 //    public ResponseEntity exDetails(@PathVariable int varId){
 //        Exercise ex = service.exDetailsService(varId);
 //        if(ex!=null) return ResponseEntity.ok(ex);

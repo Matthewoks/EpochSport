@@ -4,7 +4,10 @@ import '../models/workout.dart';
 import '../models/workout_day.dart';
 import '../services/api_service.dart';
 import 'add_workout_screen.dart';
+import 'equipment_screen.dart';
+import 'exercises_screen.dart';
 import 'workout_detail_screen.dart';
+
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -68,6 +71,42 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Calendario Allenamenti')),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.build),
+              title: const Text('Equipment'),
+              onTap: () {
+                Navigator.pop(context); // chiude il drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const EquipmentScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.fitness_center),
+              title: const Text('Exercises'),
+              onTap: () {
+                Navigator.pop(context); // chiude il drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ExercisesScreen()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           TableCalendar(
