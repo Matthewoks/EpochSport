@@ -3,16 +3,13 @@ package com.matthewoks.secondStep.services;
 import com.matthewoks.secondStep.dto.EquipmentDTO;
 import com.matthewoks.secondStep.dto.ExerciseDTO;
 import com.matthewoks.secondStep.dto.WorkoutDTO;
-import com.matthewoks.secondStep.models.Exercise;
 import com.matthewoks.secondStep.models.Workout;
-import com.matthewoks.secondStep.repositories.ExerciseRepository;
 import com.matthewoks.secondStep.repositories.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class WorkoutService {
@@ -28,10 +25,20 @@ public class WorkoutService {
                         .map(ex -> new ExerciseDTO(
                                 ex.getExercise().getId(),
                                 ex.getExercise().getName(),
+                                ex.getExercise().getDescription(),
+                                ex.getExercise().getColor(),
+                                ex.getExercise().getDuration(),
+                                ex.getExercise().getRepetitions(),
+                                ex.getExercise().getSets(),
+                                ex.getExercise().getRestTime(),
+                                ex.getExercise().getExecutionMode(),
+                                ex.getExercise().getIntensityLevel(),
+
                                 ex.getExercise().getExerciseEquipments().stream()
                                         .map(eq -> new EquipmentDTO(
                                                 eq.getEquipment().getId(),
-                                                eq.getEquipment().getName()
+                                                eq.getEquipment().getName(),
+                                                eq.getEquipment().getCategory()
                                         ))
                                         .toList()
                         ))

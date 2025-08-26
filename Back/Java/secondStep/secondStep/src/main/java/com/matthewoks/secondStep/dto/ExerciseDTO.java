@@ -12,6 +12,14 @@ import java.util.List;
 public class ExerciseDTO {
     private Long id;
     private String name;
+    private String description;
+    private String color;
+    private int duration;
+    private int repetitions;
+    private int sets;
+    private int restTime;
+    private String executionMode;
+    private int intensityLevel;
     private List<EquipmentDTO> equipments;
 }
 

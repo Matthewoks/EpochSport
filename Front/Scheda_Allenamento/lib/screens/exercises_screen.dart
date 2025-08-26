@@ -4,17 +4,51 @@ import 'package:http/http.dart' as http;
 import 'add_exercise_screen.dart';
 import 'exercises_details_screen.dart'; // il primo step del flow add exercise
 
+Color parseHexColor(String? hexColor) {
+  try {
+    if (hexColor == null || hexColor.isEmpty) {
+      return Colors.lightGreen; // default se vuoto
+    }
+
+    // Rimuovo eventuale #
+    hexColor = hexColor.replaceAll('#', '');
+
+    // Se è lungo 6 caratteri, aggiungo FF per l'opacità
+    if (hexColor.length == 6) {
+      hexColor = 'FF$hexColor';
+    }
+
+    return Color(int.parse('0x$hexColor'));
+  } catch (e) {
+    return Colors.lightGreen; // default se errore
+  }
+}
+
 class Exercise {
   final int id;
   final String name;
   final String description;
-  final String color;
+ // final String color;
+  final int duration;
+  final int repetitions;
+  final int sets;
+  final int restTime;
+  final String executionMode;
+  final int intensityLevel;
+  final List<Equipment> equipments;
 
   Exercise({
     required this.id,
     required this.name,
     required this.description,
-    required this.color,
+   // required this.color,
+    required this.duration,
+    required this.repetitions,
+    required this.sets,
+    required this.restTime,
+    required this.executionMode,
+    required this.intensityLevel,
+    required this.equipments,
   });
 
   factory Exercise.fromJson(Map<String, dynamic> json) {
@@ -22,7 +56,32 @@ class Exercise {
       id: json['id'],
       name: json['name'],
       description: json['description'] ?? '',
-      color: json['color'] ?? '',
+    //  color: parseHexColor(json['color']),
+      duration: json['duration'] ?? 0,
+      repetitions: json['repetitions'] ?? 0,
+      sets: json['sets'] ?? 0,
+      restTime: json['restTime'] ?? 0,
+      executionMode: json['executionMode'] ?? '',
+      intensityLevel: json['intensityLevel'] ?? 0,
+      equipments: (json['equipments'] as List<dynamic>? ?? [])
+          .map((e) => Equipment.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+class Equipment {
+  final int id;
+  final String name;
+  final String category;
+
+  Equipment({required this.id, required this.name, required this.category});
+
+  factory Equipment.fromJson(Map<String, dynamic> json) {
+    return Equipment(
+      id: json['id'],
+      name: json['name'],
+      category: json['category'],
     );
   }
 }
@@ -95,7 +154,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             child: const Text('Dettagli'),
             onPressed: () {
               Navigator.pop(context);
-              _details(ex.id);
+              _details(ex);
             },
           ),
           SimpleDialogOption(
@@ -116,11 +175,11 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       ),
     );
   }
-  void _details(int id) {
+  void _details(Exercise exercise) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ExercisesDetailsScreen(exerciseId: id), //sarebbe meglio passare l'oggetto con tutte le info
+        builder: (context) => ExercisesDetailsScreen(exercise: exercise), //sarebbe meglio passare l'oggetto con tutte le info
       ),
     );
   }
@@ -172,7 +231,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   title: Text(ex.name),
                   subtitle: Text(ex.description),
                   leading: CircleAvatar(
-                    backgroundColor: ex.color.isNotEmpty ? Color(int.parse('0xFF${ex.color.substring(1)}')) : Colors.blue,
+                    backgroundColor: Colors.blue, //ex.color.isNotEmpty ? Color(int.parse('0xFF${ex.color.substring(1)}')) : Colors.blue,
                   ),
                   onLongPress: () => _showOptionsDialog(ex),
                 ),

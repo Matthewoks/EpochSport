@@ -1,50 +1,91 @@
 import 'package:flutter/material.dart';
 
-class ExercisesDetailsScreen extends StatefulWidget {
-  final int exerciseId;
+import 'exercises_screen.dart';
 
-  const ExercisesDetailsScreen({super.key, required this.exerciseId});
+class ExercisesDetailsScreen extends StatelessWidget {
+  final Exercise exercise;
 
-  @override
-  State<ExercisesDetailsScreen> createState() => _ExercisesDetailsScreenState();
-}
-
-class _ExercisesDetailsScreenState extends State<ExercisesDetailsScreen> {
-  Map<String, dynamic>? exerciseDetails;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchDetails();
-  }
-
-  Future<void> _fetchDetails() async {
-    //  chiamata HTTP sarebbe meglio recuperare le info da screen principale e non fare chiamate ad ogni dettaglio
-
-
-
-  }
+  const ExercisesDetailsScreen({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Dettagli esercizio")),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(title: Text(exercise.name)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Nome: ${exerciseDetails!['name']}",
-                style: const TextStyle(fontSize: 20)),
-            const SizedBox(height: 12),
-            const Text("Equipment:",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            ...exerciseDetails!['equipment']
-                .map<Widget>((eq) => Text("- $eq"))
-                .toList(),
+            Text("Descrizione: ${exercise.description}"),
+            const SizedBox(height: 10),
+            Text("duration: ${exercise.duration}"),
+            const SizedBox(height: 10),
+            Text("repetitions: ${exercise.repetitions}"),
+            const SizedBox(height: 10),
+            Text("sets: ${exercise.sets}"),
+            const SizedBox(height: 10),
+            Text("restTime: ${exercise.restTime}"),
+            const SizedBox(height: 10),
+            Text("executionMode: ${exercise.executionMode}"),
+            const SizedBox(height: 10),
+            Text("intensityLevel: ${exercise.intensityLevel}"),
+            const SizedBox(height: 10),
+         //   Text("Colore: ${exercise.color}"),
+          //  const SizedBox(height: 20),
+            Text("Equipment collegati:", style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: exercise.equipments.length,
+                itemBuilder: (context, index) {
+                  final eq = exercise.equipments[index];
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      bool tapped = false;
+                      return GestureDetector(
+                        onTapDown: (_) => setState(() => tapped = true),
+                        onTapUp: (_) => setState(() => tapped = false),
+                        onTapCancel: () => setState(() => tapped = false),
+                        child: AnimatedScale(
+                          scale: tapped ? 0.95 : 1.0,
+                          duration: const Duration(milliseconds: 150),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            elevation: 6,
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.fitness_center, size: 40, color: Colors.blueAccent),
+
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(eq.name,
+                                            style: const TextStyle(
+                                                fontSize: 16, fontWeight: FontWeight.bold)),
+                                        const SizedBox(height: 6),
+                                        Text(eq.category,
+                                            style: const TextStyle(
+                                                fontSize: 14, color: Colors.black54)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
