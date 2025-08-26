@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../models/exercise.dart';
 import 'add_exercise_screen.dart';
-import 'exercises_details_screen.dart'; // il primo step del flow add exercise
+import 'exercise_detail_screen.dart'; // il primo step del flow add exercise
 
 Color parseHexColor(String? hexColor) {
   try {
@@ -24,67 +25,7 @@ Color parseHexColor(String? hexColor) {
   }
 }
 
-class Exercise {
-  final int id;
-  final String name;
-  final String description;
- // final String color;
-  final int duration;
-  final int repetitions;
-  final int sets;
-  final int restTime;
-  final String executionMode;
-  final int intensityLevel;
-  final List<Equipment> equipments;
 
-  Exercise({
-    required this.id,
-    required this.name,
-    required this.description,
-   // required this.color,
-    required this.duration,
-    required this.repetitions,
-    required this.sets,
-    required this.restTime,
-    required this.executionMode,
-    required this.intensityLevel,
-    required this.equipments,
-  });
-
-  factory Exercise.fromJson(Map<String, dynamic> json) {
-    return Exercise(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'] ?? '',
-    //  color: parseHexColor(json['color']),
-      duration: json['duration'] ?? 0,
-      repetitions: json['repetitions'] ?? 0,
-      sets: json['sets'] ?? 0,
-      restTime: json['restTime'] ?? 0,
-      executionMode: json['executionMode'] ?? '',
-      intensityLevel: json['intensityLevel'] ?? 0,
-      equipments: (json['equipments'] as List<dynamic>? ?? [])
-          .map((e) => Equipment.fromJson(e))
-          .toList(),
-    );
-  }
-}
-
-class Equipment {
-  final int id;
-  final String name;
-  final String category;
-
-  Equipment({required this.id, required this.name, required this.category});
-
-  factory Equipment.fromJson(Map<String, dynamic> json) {
-    return Equipment(
-      id: json['id'],
-      name: json['name'],
-      category: json['category'],
-    );
-  }
-}
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({Key? key}) : super(key: key);
@@ -128,7 +69,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             children: [
               Icon(Icons.check, color: Colors.white),
               SizedBox(width: 10),
-              Text('Exercise eliminato con successo'),
+              Text('Esercizio eliminato con successo.'),
             ],
           ),
           backgroundColor: Colors.green,
@@ -137,7 +78,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Errore durante l\'eliminazione'),
+          content: Text('Errore durante l\'eliminazione.'),
           backgroundColor: Colors.red,
         ),
       );
@@ -175,6 +116,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       ),
     );
   }
+
   void _details(Exercise exercise) {
     Navigator.push(
       context,
@@ -183,6 +125,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       ),
     );
   }
+
   void _confirmDelete(int id) {
     showDialog(
       context: context,
@@ -209,7 +152,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Exercises')),
+      appBar: AppBar(title: const Text('Esercizi')),
       body: FutureBuilder<List<Exercise>>(
         future: _exercises,
         builder: (context, snapshot) {
@@ -258,7 +201,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   children: [
                     Icon(Icons.check, color: Colors.white),
                     SizedBox(width: 10),
-                    Text('Exercise aggiunto con successo'),
+                    Text('Esercizio aggiunto con successo'),
                   ],
                 ),
                 backgroundColor: Colors.green,
@@ -267,7 +210,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           }
         },
         child: const Icon(Icons.add),
-        tooltip: 'Aggiungi Exercise',
+        tooltip: 'Aggiungi esercizio',
       ),
     );
   }

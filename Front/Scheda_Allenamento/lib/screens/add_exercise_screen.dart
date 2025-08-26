@@ -74,7 +74,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Nuovo Exercise')),
+      appBar: AppBar(title: const Text('Nuovo esercizio')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: _isLoading
@@ -120,7 +120,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _nextStep,
-                child: const Text('Avanti: Seleziona Equipments'),
+                child: const Text('Avanti: Seleziona strumenti'),
               ),
             ],
           ),

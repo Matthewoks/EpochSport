@@ -2,23 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../models/equipment.dart';
 import 'add_equipment_screen.dart';
-
-class Equipment {
-  final int id;
-  final String name;
-  final String category;
-
-  Equipment({required this.id, required this.name, required this.category});
-
-  factory Equipment.fromJson(Map<String, dynamic> json) {
-    return Equipment(
-      id: json['id'],
-      name: json['name'],
-      category: json['category'],
-    );
-  }
-}
 
 class EquipmentScreen extends StatefulWidget {
   const EquipmentScreen({Key? key}) : super(key: key);
@@ -44,7 +29,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((e) => Equipment.fromJson(e)).toList();
     } else {
-      throw Exception('Errore nel caricamento degli strumenti');
+      throw Exception('Errore nel caricamento degli strumenti.');
     }
   }
 
@@ -63,7 +48,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
             children: [
               Icon(Icons.check, color: Colors.white),
               SizedBox(width: 10),
-              Text('Equipment eliminato con successo'),
+              Text('Strumento eliminato con successo.'),
             ],
           ),
           backgroundColor: Colors.green,
@@ -72,7 +57,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Errore durante l\'eliminazione'),
+          content: Text('Errore durante l\'eliminazione.'),
           backgroundColor: Colors.red,
         ),
       );
@@ -115,7 +100,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Conferma eliminazione'),
-        content: const Text('Sei sicuro di voler eliminare questo equipment?'),
+        content: const Text('Sei sicuro di voler eliminare questo strumento?'),
         actions: [
           TextButton(
             child: const Text('Annulla'),
@@ -136,7 +121,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Equipment')),
+      appBar: AppBar(title: const Text('Strumenti')),
       body: FutureBuilder<List<Equipment>>(
         future: _equipments,
         builder: (context, snapshot) {
@@ -145,7 +130,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Errore: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Nessuno strumento trovato'));
+            return const Center(child: Text('Nessuno strumento trovato.'));
           }
 
           final equipments = snapshot.data!;
@@ -182,7 +167,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                   children: [
                     Icon(Icons.check, color: Colors.white),
                     SizedBox(width: 10),
-                    Text('Equipment aggiunto con successo'),
+                    Text('Strumento aggiunto con successo.'),
                   ],
                 ),
                 backgroundColor: Colors.green,
@@ -191,7 +176,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
           }
         },
         child: const Icon(Icons.add),
-        tooltip: 'Aggiungi Equipment',
+        tooltip: 'Aggiungi strumento',
       ),
     );
   }

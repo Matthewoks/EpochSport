@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'exercise.dart';
+
 
 class Workout {
-  final String id;
+  final int id;
   final String name;
   final String color; // es. "#FF0000"
-  final List<String> exercises;
+  final List<Exercise> exercises;
 
   Workout({
     required this.id,
@@ -16,9 +18,11 @@ class Workout {
   factory Workout.fromJson(Map<String, dynamic> json) {
     return Workout(
       id: json['id'],
-      name: json['name'],
-      color: json['color'],
-      exercises: List<String>.from(json['exercises']),
+      name: json['name'] ?? '',
+      color: json['color'] ?? '',
+      exercises: (json['exercises'] as List<dynamic>? ?? [])
+          .map((e) => Exercise.fromJson(e))
+          .toList(),
     );
   }
 

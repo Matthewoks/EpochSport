@@ -70,18 +70,18 @@ class _WorkoutCreateScreenState extends State<WorkoutCreateScreen> {
   }
 
   /// Salva il nuovo allenamento e chiude la schermata
-  void _submit() {
-    if (_formKey.currentState!.validate() && selectedDate != null && exercises.isNotEmpty) {
-      final workout = Workout(
-        id: "7",
-        name: name,
-        color: '#${selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
-        exercises: exercises,
-      );
-      widget.onCreate(workout);
-      Navigator.pop(context);
-    }
-  }
+ // void _submit() {
+//    if (_formKey.currentState!.validate() && selectedDate != null && exercises.isNotEmpty) {
+ //     final workout = Workout(
+//        id: 7,
+ //       name: name,
+ //       color: '#${selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+       // exercises: exercises,
+ //     );
+ //     widget.onCreate(workout);
+ //     Navigator.pop(context);
+  //  }
+ // }
 
   @override
   void dispose() {
@@ -148,10 +148,10 @@ class _WorkoutCreateScreenState extends State<WorkoutCreateScreen> {
               ),
               ...exercises.map((e) => ListTile(title: Text(e))),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submit,
-                child: const Text('Crea Allenamento'),
-              ),
+              //ElevatedButton(
+               // onPressed: _submit,
+               // child: const Text('Crea Allenamento'),
+             // ),
             ],
           ),
         ),

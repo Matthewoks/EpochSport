@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'exercises_screen.dart';
+import '../models/exercise.dart';
+import 'exercise_screen.dart';
 
 class ExercisesDetailsScreen extends StatelessWidget {
   final Exercise exercise;
@@ -32,7 +33,7 @@ class ExercisesDetailsScreen extends StatelessWidget {
             const SizedBox(height: 10),
          //   Text("Colore: ${exercise.color}"),
           //  const SizedBox(height: 20),
-            Text("Equipment collegati:", style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text("Strumenti collegati:", style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(

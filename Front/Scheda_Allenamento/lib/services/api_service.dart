@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../models/workout.dart';
+import '../models/exercise.dart';
+import '../models/equipment.dart';
 import '../models/workout_day.dart';
 
 import 'dart:convert';
@@ -11,7 +13,7 @@ import 'package:http/http.dart' as http;
 import '../models/workout.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:5128/api/workouts'; // aggiorna con il tuo indirizzo
+  static const String baseUrl = 'http://10.0.2.2:1111/api/workouts'; // aggiorna con il tuo indirizzo
 
   static Future<List<WorkoutDay>> fetchWorkoutsForMonth(DateTime month) async {
     final monthStr = "${month.year}-${month.month.toString().padLeft(2, '0')}-01";
@@ -28,7 +30,7 @@ class ApiService {
   }
 
   static Future<void> addWorkout(DateTime date, Workout workout) async {
-    final url = Uri.parse('http://10.0.2.2:5128/api/addworkouts');
+    final url = Uri.parse('http://10.0.2.2:1111/api/addworkouts');
 
     final body = jsonEncode({
       "date": date.toIso8601String(),

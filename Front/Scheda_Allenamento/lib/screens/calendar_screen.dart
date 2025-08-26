@@ -5,7 +5,8 @@ import '../models/workout_day.dart';
 import '../services/api_service.dart';
 import 'add_workout_screen.dart';
 import 'equipment_screen.dart';
-import 'exercises_screen.dart';
+import 'exercise_screen.dart';
+import 'workout_screen.dart';
 import 'workout_detail_screen.dart';
 
 
@@ -84,7 +85,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.build),
-              title: const Text('Equipment'),
+              title: const Text('Strumenti'),
               onTap: () {
                 Navigator.pop(context); // chiude il drawer
                 Navigator.push(
@@ -95,12 +96,22 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.fitness_center),
-              title: const Text('Exercises'),
+              title: const Text('Esercizi'),
               onTap: () {
                 Navigator.pop(context); // chiude il drawer
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const ExercisesScreen()),
+                );
+              },
+            ),ListTile(
+              leading: const Icon(Icons.accessibility),
+              title: const Text('Workouts'),
+              onTap: () {
+                Navigator.pop(context); // chiude il drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const WorkoutsScreen()),
                 );
               },
             ),
@@ -185,7 +196,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  AddWorkoutScreen(selectedDate: _selectedDay),
+                  AddWorkoutScreen(),
             ),
           );
           //da richiamare il caricamento per ripopolare gli allenamenti

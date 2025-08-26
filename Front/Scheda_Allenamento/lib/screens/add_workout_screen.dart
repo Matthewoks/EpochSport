@@ -1,12 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../models/workout.dart';
 import '../services/api_service.dart';
+import 'add_workout_exercise_screen.dart';
 
 
 class AddWorkoutScreen extends StatefulWidget {
-  final DateTime selectedDate;
-  const AddWorkoutScreen({super.key, required this.selectedDate});
+  const AddWorkoutScreen({Key? key}) : super(key: key);
 
   @override
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
@@ -15,15 +17,60 @@ class AddWorkoutScreen extends StatefulWidget {
 class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _colorController = TextEditingController();
   final _exerciseController = TextEditingController();
-  final List<String> _exercises = [];
-  DateTime _selectedDate = DateTime.now();
-  Color _selectedColor = Colors.blue;
+  bool _isLoading = false;
 
+  Future<int?> createExercise() async {
+    setState(() => _isLoading = true);
+
+    final url = Uri.parse('http://10.0.2.2:1111/api/workouts');
+    final body = jsonEncode({
+      "name": _nameController.text,
+      "color": _colorController.text,
+    });
+
+    try {
+      final response = await http.post(url,
+          headers: {'Content-Type': 'application/json'}, body: body);
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['id']; // ID del workout creato
+      } else {
+        throw Exception('Errore durante la creazione');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Errore: $e'), backgroundColor: Colors.red),
+      );
+      return null;
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+
+  void _nextStep() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final workoutId = await createExercise();
+    if (workoutId != null) {
+      // Passiamo l'workout_id al secondo step
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AddWorkoutExerciseScreen(workoutId: workoutId),
+        ),
+      );
+    }
+  }
+
+  /*
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.selectedDate;
+
   }
 
   void _selectDate() async {
@@ -99,61 +146,35 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         const SnackBar(content: Text('Compila tutti i campi e aggiungi almeno un esercizio')),
       );
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Aggiungi Allenamento')),
+      appBar: AppBar(title: const Text('Nuovo workout')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Form(
           key: _formKey,
           child: ListView(
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Nome Allenamento'),
-                validator: (value) => value == null || value.isEmpty ? 'Inserisci un nome' : null,
+                decoration: const InputDecoration(labelText: 'Nome'),
+                validator: (v) =>
+                v == null || v.isEmpty ? 'Campo obbligatorio' : null,
               ),
-              const SizedBox(height: 10),
-              ListTile(
-                title: Text('Data: ${_selectedDate.toLocal().toString().split(' ')[0]}'),
-                trailing: const Icon(Icons.calendar_today),
-                onTap: _selectDate,
-              ),
-              ListTile(
-                title: const Text('Colore'),
-                trailing: CircleAvatar(backgroundColor: _selectedColor),
-                onTap: _selectColor,
-              ),
-              const SizedBox(height: 10),
               TextFormField(
-                controller: _exerciseController,
-                decoration: const InputDecoration(labelText: 'Esercizio'),
-                onFieldSubmitted: (_) => _addExercise(),
+                controller: _colorController,
+                decoration: const InputDecoration(labelText: 'Colore'),
               ),
+
+              const SizedBox(height: 32),
               ElevatedButton(
-                onPressed: _addExercise,
-                child: const Text('Aggiungi Esercizio'),
-              ),
-              Wrap(
-                spacing: 6,
-                children: _exercises
-                    .map((e) => Chip(
-                  label: Text(e),
-                  onDeleted: () {
-                    setState(() {
-                      _exercises.remove(e);
-                    });
-                  },
-                ))
-                    .toList(),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitWorkout,
-                child: const Text('Salva Allenamento'),
+                onPressed: _nextStep,
+                child: const Text('Avanti: Seleziona esercizi'),
               ),
             ],
           ),

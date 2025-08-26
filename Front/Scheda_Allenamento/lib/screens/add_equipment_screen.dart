@@ -53,7 +53,7 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Nuovo Equipment')),
+      appBar: AppBar(title: const Text('Nuovo strumento.')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: _isLoading
