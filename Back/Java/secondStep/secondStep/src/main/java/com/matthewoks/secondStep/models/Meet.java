@@ -17,7 +17,7 @@ public abstract class Meet {
 
 
     public Meet(Long id,String color, String meetName) {
-        this.id=id;
+        this.id = id;
         this.name = meetName;
         this.color = color;
     }

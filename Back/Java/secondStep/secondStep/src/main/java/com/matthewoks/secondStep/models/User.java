@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -17,6 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true,nullable = false)
     private String username;
     private String bio;
     @Column(name="last_login")
@@ -25,7 +28,7 @@ public class User {
     private String languagePreference;
     private String timezone;
     @Column(name="is_active")
-    private String isActive;
+    private String isActive = "Y";
     @Column(name="birth_date")
     private Date birthDate;
     @Column(name="created_at")
@@ -34,9 +37,11 @@ public class User {
     private float weight;
     private float height;
     private float waist;
+    @Enumerated(EnumType.STRING)
     private String role;
-    @Column(name="password_hash")
+    @Column(name="password_hash",nullable = false)
     private String passwordHash;
+    @Column(unique = true,nullable = false)
     private String email;
     @Column(name="phone_number")
     private String phoneNumber;
@@ -53,5 +58,15 @@ public class User {
     @Column(name="updated_at")
     private Date updatedAt;
 
+    @ManyToMany
+    @JoinTable(name = "user_roles")
+    private Set<Role> roles = new HashSet<>();
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
