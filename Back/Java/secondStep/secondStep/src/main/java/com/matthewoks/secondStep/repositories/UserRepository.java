@@ -1,19 +1,17 @@
 package com.matthewoks.secondStep.repositories;
 
 import com.matthewoks.secondStep.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository  extends PagingAndSortingRepository<User, Long> { //JpaRepository<User,Long> {
+public interface UserRepository  extends JpaRepository<User,Long> { //PagingAndSortingRepository<User, Long> { //
 
-    Page<User> findByName(String name, Pageable pageable);
-    Optional<User> findByUsername(String name);
-
+   // Page<User> findByName(String name, Pageable pageable);
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
     //User findByUsername(String username);
     //User findByUsernameAndLanguagePreference(String username, String lang);
 

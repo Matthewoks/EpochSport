@@ -14,7 +14,7 @@ import java.util.Date;
 public class JwtUtils {
     @Value("${jwt.secret}")
     private String jwtSecret;
-    @Value("${jwt.expirationms}")
+    @Value("${jwt.exp irationms}")
     private Long jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
@@ -29,6 +29,7 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact(); //aggiungo chiave segreta+codifica
     }
 
+    //valida il token
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(authToken);

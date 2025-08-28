@@ -2,19 +2,22 @@ package com.matthewoks.secondStep.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-@Entity
-@Table(name="users")
 @Data //getters, setters, tostring, equals, hashcode
+@Builder
 @NoArgsConstructor //costruttore senzza argomenti
 @AllArgsConstructor
-public class User {
+@Entity
+@Table(name="users")
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,7 +41,7 @@ public class User {
     private float height;
     private float waist;
     @Enumerated(EnumType.STRING)
-    private String role;
+    private RoleType role;
     @Column(name="password_hash",nullable = false)
     private String passwordHash;
     @Column(unique = true,nullable = false)
@@ -58,15 +61,50 @@ public class User {
     @Column(name="updated_at")
     private Date updatedAt;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles")
-    private Set<Role> roles = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(name = "user_roles")
+//    private Set<Role> roles = new HashSet<>();
 
-    public Set<Role> getRoles() {
-        return roles;
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
