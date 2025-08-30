@@ -7,6 +7,7 @@ import com.matthewoks.secondStep.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,19 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     public AuthenticationResponse register(RegisterRequest request){
         var user = User.builder()
+                //  .name(request.getName())
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .role(RoleType.ROLE_USER)
+                //       .createdAt(new Date())
+                //                .isActive("Y")
                 .build();
         repository.save(user);
+
         var jwtToken=jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -36,11 +42,15 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
-                    request.getEmail(),
+                    request.getUsername(),
                     request.getPassword())
         );
-        var user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
+
+        var user = repository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+
+//        var user = repository.findByEmail(request.getEmail())
+//                .orElseThrow();
         var jwtToken=jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

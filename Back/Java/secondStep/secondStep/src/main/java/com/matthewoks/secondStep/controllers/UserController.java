@@ -19,27 +19,27 @@ public class UserController {
         return repo.findAll(); //già disponibile senza fare nulla di particolare nella repo
     }
 
-    @GetMapping("/username/{username}")
-    public User getByUserName(@PathVariable String username){
-        return repo.findByUsername(username); //già disponibile senza fare nulla di particolare nella repo
-        //username è univoco solo un oggetto
-    }
+//    @GetMapping("/username/{username}")
+//    public User getByUserName(@PathVariable String username){
+//        return repo.findByUsername(username); //già disponibile senza fare nulla di particolare nella repo
+//        //username è univoco solo un oggetto
+//    }
+//
+//    @GetMapping("/language_preference/{lang}")
+//    public List<User> getByLanguagePreference(@PathVariable String lang){
+//        return repo.findByLanguagePreference(lang); //già disponibile senza fare nulla di particolare nella repo
+//    }
+//
+//    @GetMapping("/fragmentusername/{username}")
+//    public List<User> getByFragmentUsername(@PathVariable String username){
+//        return repo.findByUsernameFragment(username); //già disponibile senza fare nulla di particolare nella repo
+//    }
 
-    @GetMapping("/language_preference/{lang}")
-    public List<User> getByLanguagePreference(@PathVariable String lang){
-        return repo.findByLanguagePreference(lang); //già disponibile senza fare nulla di particolare nella repo
-    }
-
-    @GetMapping("/fragmentusername/{username}")
-    public List<User> getByFragmentUsername(@PathVariable String username){
-        return repo.findByUsernameFragment(username); //già disponibile senza fare nulla di particolare nella repo
-    }
-
-    @GetMapping("/combined/{username}/{lang}")
-    public User getByUsernameAndLanguagePreference(@PathVariable String username, @PathVariable String lang){
-
-        return repo.findByUsernameAndLanguagePreference(username,lang); //già disponibile senza fare nulla di particolare nella repo
-    }//ricerca combinata
+//    @GetMapping("/combined/{username}/{lang}")
+//    public User getByUsernameAndLanguagePreference(@PathVariable String username, @PathVariable String lang){
+//
+//        return repo.findByUsernameAndLanguagePreference(username,lang); //già disponibile senza fare nulla di particolare nella repo
+//    }//ricerca combinata
 
     @GetMapping("/{id}")
     public Optional<User> getById(@PathVariable int id){

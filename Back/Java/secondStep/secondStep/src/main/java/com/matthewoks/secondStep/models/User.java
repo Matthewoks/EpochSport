@@ -41,6 +41,8 @@ public class User implements UserDetails {
     private float height;
     private float waist;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+
     private RoleType role;
     @Column(name="password_hash",nullable = false)
     private String passwordHash;
