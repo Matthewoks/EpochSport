@@ -1,5 +1,6 @@
 package com.matthewoks.secondStep.controllers;
 
+import com.matthewoks.secondStep.models.Equipment;
 import com.matthewoks.secondStep.models.User;
 import com.matthewoks.secondStep.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,12 @@ public class UserController {
         return repo.findAll(); //già disponibile senza fare nulla di particolare nella repo
     }
 
-//    @GetMapping("/username/{username}")
-//    public User getByUserName(@PathVariable String username){
-//        return repo.findByUsername(username); //già disponibile senza fare nulla di particolare nella repo
-//        //username è univoco solo un oggetto
-//    }
-//
+    @GetMapping("/username/{username}")
+    public Optional<User> getByUserName(@PathVariable String username){
+        return repo.findByUsername(username); //già disponibile senza fare nulla di particolare nella repo
+        //username è univoco solo un oggetto
+    }
+
 //    @GetMapping("/language_preference/{lang}")
 //    public List<User> getByLanguagePreference(@PathVariable String lang){
 //        return repo.findByLanguagePreference(lang); //già disponibile senza fare nulla di particolare nella repo

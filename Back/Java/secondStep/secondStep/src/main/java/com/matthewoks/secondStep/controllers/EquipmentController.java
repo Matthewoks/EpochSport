@@ -7,6 +7,7 @@ import com.matthewoks.secondStep.models.Workout;
 import com.matthewoks.secondStep.repositories.EquipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +28,16 @@ public class EquipmentController {
     public Optional<Equipment> getById(@PathVariable int id){
         return repo.findById((long)id);
     }
-
+    @GetMapping("/test")
+    public String test() {
+        return "Sei autenticato!";
+    }
     @PostMapping
     public Equipment save(@RequestBody Equipment eq) {
         return repo.save(eq);
     }
     @DeleteMapping("{varId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable int varId) {
         if(varId!=0) repo.deleteById((long) varId);
     }

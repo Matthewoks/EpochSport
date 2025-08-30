@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private String languagePreference;
     private String timezone;
     @Column(name="is_active")
-    private String isActive = "Y";
+    private String isActive;
     @Column(name="birth_date")
     private Date birthDate;
     @Column(name="created_at")
@@ -102,7 +102,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
