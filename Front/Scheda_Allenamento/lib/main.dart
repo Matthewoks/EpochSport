@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scheda_allenamento/main.dart';
 import 'package:scheda_allenamento/models/workout.dart';
+import 'package:scheda_allenamento/screens/welcome_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 //import 'screens/calendar_screen.dart';
 import 'screens/login_screen.dart';
@@ -15,11 +16,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Workout Calendar',
 
       theme: ThemeData(  primarySwatch: Colors.blue ),
-      home: LoginScreen(), //home: const CalendarScreen(),
+      home: const WelcomeScreen() //vecchia LoginScreen(), //home: const CalendarScreen(),
     );
   }
 }
