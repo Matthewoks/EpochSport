@@ -28,14 +28,14 @@ class WelcomeScreen extends StatelessWidget {
                     text: const TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Welcome\n',
+                          text: 'Buondì\n',
                           style: TextStyle(
                             fontSize: 45.0,
                             fontWeight: FontWeight.w600,
                           )),
                         TextSpan(
                           text:
-                            '\nEnter details to your account',
+                            '\nAccedi per smettere di essere un tiratore di coriandoli',
                           style: TextStyle(
                             fontSize: 20,
 
