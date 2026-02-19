@@ -5,6 +5,8 @@ import com.matthewoks.secondStep.models.Equipment;
 import com.matthewoks.secondStep.models.User;
 import com.matthewoks.secondStep.models.Workout;
 import com.matthewoks.secondStep.repositories.EquipmentRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +21,7 @@ import java.util.Set;
 public class EquipmentController {
     @Autowired
     private EquipmentRepository repo;
-
+ //   @Operation(summary = "Get all strumenti della morte", security = @SecurityRequirement(name = "Bearer Authentication"))
     @GetMapping
     public List<Equipment> getAll(){
         return repo.findAll();
@@ -28,6 +30,7 @@ public class EquipmentController {
     public Optional<Equipment> getById(@PathVariable int id){
         return repo.findById((long)id);
     }
+   // @Operation(summary = "test", security = @SecurityRequirement(name = "Bearer Authentication"))
     @GetMapping("/test")
     public String test() {
         return "Sei autenticato!";

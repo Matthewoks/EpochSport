@@ -26,9 +26,20 @@ public class SecurityConfiguration {
                .csrf(csrf -> csrf.disable())
                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                .authorizeHttpRequests(auth -> auth
+
                        .requestMatchers("/api/v1/auth/**").permitAll()
-                     //  .requestMatchers("/api/equipments/**").authenticated()
-                       .anyRequest().authenticated()
+                       .requestMatchers("/api/auth/**",
+                               "/swagger-ui/**",
+                               "/swagger-ui.html",
+                               "/v3/api-docs/**",
+                               "/v3/api-docs",
+                               "/swagger-resources/**",
+                               "/webjars/**",
+                               "/configuration/**",
+                               "/swagger-config/**").permitAll()
+                       .requestMatchers("/api/equipments/**").authenticated()
+                       .anyRequest()
+                               .authenticated()
                )
                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                .authenticationProvider(authenticationProvider);
